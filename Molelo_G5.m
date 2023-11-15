@@ -1,5 +1,5 @@
 
-%Parametros de Marte 
+%Parametros de Marte blame
 g_marte=3.73;%m/s
 ro_marte=0.020;%kg/m^3
 
@@ -78,7 +78,8 @@ Fp4=T4*[-sin(20*pi/180); 0; cos(20*pi/180)];
 %n4;
 np4=p4*Fp4;
 
-T=Fp1+Fp2+Fp3+Fp4;
+fp=[Fp1 Fp2 Fp3 Fp4];
+T_m=Fp1+Fp2+Fp3+Fp4;
 np=[np1; np2; np3; np4];
 %Modelo não linear
 
@@ -88,9 +89,11 @@ zI = [0;0;1];
 nx = 12;
 ny = 4;
 x0 = zeros(nx,1);
-Dt = 0.01;
-t = 0:Dt:10;
-u_NL = np*ones(size(t));
+Dt = 0.1;
+t = 0:Dt:60;
+T=mt*g_marte;
+u_L=[0.2*mt*g_marte;0.1;0.1;0.1]*(t>=0);
+u_NL = [T;0;0;0]*ones(size(t))+u_L;
 
 C = [   eye(3)    , zeros(3)   , zeros(3) , zeros(3)
         zeros(1,3), zeros(1,3) , zI'      , zeros(1,3)  ];
@@ -102,7 +105,7 @@ y = zeros(ny,Nsim);
 x(:,1) = x0;
 for k = 1:Nsim
     % prepare variables:
-    p= x(1:3,k);
+    p=x(1:3,k);
     v= x(4:6,k);
     lbd = x(7:9,k);
     omg  = x(10:12,k);
@@ -115,7 +118,7 @@ for k = 1:Nsim
     p_dot=R*v;
     R_dot=R*skew(omg);
     lbd_dot = Euler2Q(lbd)*omg;
-    v_dot= -skew(omg)*v + g_marte*R'*zI - R*D*R'*v - 1/mt*(T+fa);
+    v_dot= -skew(omg)*v + g_marte*R'*zI - R*D*R'*v - 1/mt*(T_m+fa);
     om_dot = -inv(jlr)*skew(omg)*jlr*omg + inv(jlr)*np;
     
     x_dot = [p_dot;v_dot;lbd_dot;om_dot];
