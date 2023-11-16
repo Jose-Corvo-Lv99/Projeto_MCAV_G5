@@ -1,5 +1,5 @@
 
-%Parametros de Marte blame
+%Parametros de Marte
 g_marte=3.73;%m/s
 ro_marte=0.020;%kg/m^3
 
