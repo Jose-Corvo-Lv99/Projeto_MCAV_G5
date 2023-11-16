@@ -100,7 +100,7 @@ u_NL=[T;0;0;0]*ones(size(t));
 C = [   eye(3)    , zeros(3)   , zeros(3) , zeros(3)
         zeros(1,3), zeros(1,3) , zI'      , zeros(1,3)  ];
 
-% simulasão do sistema não-linear
+% simulação do sistema não-linear
 Nsim = length(t);
 x = zeros(nx,Nsim);
 y = zeros(ny,Nsim);
