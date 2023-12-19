@@ -1,5 +1,7 @@
 
-%Parametros de Marte
+
+
+%Parametros de Marte 
 g_marte=3.73;%m/s
 ro_marte=0.020;%kg/m^3
 
@@ -40,7 +42,7 @@ cm_t=(ml*(zr+zl/2)+mr*(zr/2))/mt;
 pz_cm=cm_t-zr;
 
 %Definição de um thrust
-T1=g_marte*mt/4;
+T1=Thrust/4;
 T2=T1;
 T3=T1;
 T4=T1;
@@ -51,7 +53,7 @@ T4=T1;
 p1=[0 pz_cm -yl/2
     -pz_cm 0 xl/2
     yl/2 -xl/2 0];
-Fp1=T1*[sin(20*pi/180); 0; cos(20*pi/180)];
+Fp1=T1*[sin(20*pi/180); eixoy; cos(20*pi/180)];
 
 np1=p1*Fp1;
 
@@ -59,7 +61,7 @@ np1=p1*Fp1;
 p2=[0 pz_cm yl/2
     -pz_cm 0 xl/2
     -yl/2 -xl/2 0];
-Fp2=T2*[sin(20*pi/180); 0; cos(20*pi/180)];
+Fp2=T2*[sin(20*pi/180); eixoy; cos(20*pi/180)];
 
 np2=p2*Fp2;
 
@@ -67,7 +69,7 @@ np2=p2*Fp2;
 p3=[0 pz_cm -yl/2
     -pz_cm 0 -xl/2
     yl/2 xl/2 0];
-Fp3=T3*[-sin(20*pi/180); 0; cos(20*pi/180)];
+Fp3=T3*[-sin(20*pi/180); eixoy; cos(20*pi/180)];
 
 np3=p3*Fp3;
 
@@ -75,7 +77,7 @@ np3=p3*Fp3;
 p4=[0 pz_cm yl/2
     -pz_cm 0 -xl/2
     -yl/2 -xl/2 0];
-Fp4=T4*[-sin(20*pi/180); 0; cos(20*pi/180)];
+Fp4=T4*[-sin(20*pi/180); eixoy; cos(20*pi/180)];
 
 np4=p4*Fp4;
 
