@@ -16,9 +16,9 @@ Gtf = tf(Gss)
 rank(A);
 [U,S,V]=svd(A);
 
-
-for i = 1:length(W)
-    s = j*W(i);
+FFFF=[0.1,1,9.9,20];
+for i = 1:length(FFFF)
+    s = j*FFFF(i);
     [U,S,V] = svd(A);
 end
 

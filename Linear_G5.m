@@ -71,4 +71,3 @@ legend('$$p_z$$ (lin)','$$\psi$$ (lin)','$$p_z$$ (nlin)','$$\psi$$ (nlin)');
 
 
 
-
