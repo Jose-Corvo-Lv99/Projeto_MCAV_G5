@@ -1,5 +1,5 @@
 
-run Modelo_G5
+run ModeloB_G5.m
 
 %Linearização
 
