@@ -57,3 +57,16 @@ elseif mode==4
 end
 run Controlador_H_inf.m
     
+
+% test controlability, observability and stability
+[V,DL,W] = eig(A);
+
+if any(real(diag(D)) >=0 ), disp('Linearized system 1 is not stable.'); end
+
+n1_unstable_modes = rank(ctrb(A,B))-12;
+
+if n1_unstable_modes > 0, disp('Linearized system 1 is not controlable.'); end
+
+n1_unobservable_modes = rank(obsv(A,C))-12;
+if n1_unobservable_modes > 0, disp('Linearized system 1 is not observable.'); end
+
