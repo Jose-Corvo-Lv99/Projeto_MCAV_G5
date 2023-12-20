@@ -27,8 +27,11 @@ jl=[(1/12)*ml*(yl^2+zl^2) 0 0
     0 (1/12)*ml*(xl^2+zl^2) 0
     0 0 (1/12)*ml*(yl^2+xl^2)];
 
-
+if mode~=4
 jlr=jr+jl;
+elseif mode==4
+    jlr=jl;
+end
 
 if mode~=4
 mt=mr+ml;
@@ -41,13 +44,17 @@ Beta=0.5*2.05*ro_marte*Area_l;
 D=Beta;
 
 %Definição dos eixos
+if mode~=4
 cm_t=(ml*(zr+zl/2)+mr*(zr/2))/mt;
+elseif mode==4
+    cm_t=ml*(zr+zl/2);
+end
 
 %O centro do eixo das coordenadas vai estar no centro de massa
 pz_cm=cm_t-zr;
 
 %Definição de um thrust
-T1=Thrust-g_marte*mt/4;
+T1=(Thrust-g_marte*mt)/4;
 T2=T1;
 T3=T1;
 T4=T1;
