@@ -23,9 +23,7 @@ A4=[0,v_z,-v_y;
 A5=zeros(3);%Porque omg_x, omg:y, omg_z são iguais a zero
 A6=Euler2Q(lbd);
 A7=zeros(3);
-%[0, omg_z*jlr, omg_y*jlr;
- %   omg_z*jlr, 0, omg_x*jlr;
-  %  omg_y*jlr, omg_x*jlr, 0]
+
 
 
 A=[   zeros(3), eye(3)    , A1  , zeros(3)
@@ -50,7 +48,6 @@ D = zeros(4);
 sys = ss(A,B,C,D);
 
 [Vj,Jor] = jordan(A),
-% [Vj,Jor] = jordan(sym(A)),
 [V,DL,W] = eig(A),
 mode_obs = C*V,
 mode_ctrl = W'*B,
