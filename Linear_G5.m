@@ -35,10 +35,10 @@ A=[   zeros(3), eye(3)    , A1  , zeros(3)
 
 %Parar matriz B
 
-B=[ zeros(3,1), zeros(3);
-    (1/mt)*zI, zeros(3);
-    zeros(3,1), zeros(3);
-    zeros(3,1), inv(jlr)];
+B=[zeros(3,1), zeros(3);
+   (1/mt)*zI, zeros(3);
+   zeros(3,1), zeros(3);
+   zeros(3,1), inv(jlr)];
 
 %Para matriz C
 C = [   eye(3)    , zeros(3)   , zeros(3) , zeros(3)
@@ -68,6 +68,8 @@ figure(90322);
 plot(t,y_L(3:4,:),'--',t,y(3:4,:),'-.');
 grid on;
 legend('$$p_z$$ (lin)','$$\psi$$ (lin)','$$p_z$$ (nlin)','$$\psi$$ (nlin)');
+
+if any(real(diag(D)) >=0 ), disp('Linearized system is not stable.'); end
 
 
 
