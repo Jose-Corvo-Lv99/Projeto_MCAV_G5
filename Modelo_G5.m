@@ -50,33 +50,23 @@ T4=T1;
 
 %Posições dos retrorockets e purpulsão
 p1=[-xl/2 -yl/2 -pz_cm];
-%p1=[0 pz_cm -yl/2
- %   -pz_cm 0 xl/2
-  %  yl/2 -xl/2 0];
 Fp1=T1*[sin(20*pi/180); 0; cos(20*pi/180)];
 
 np1=p1*Fp1;
 
 p2=[-xl/2 yl/2 -pz_cm];
-%p2=[0 pz_cm yl/2
- %   -pz_cm 0 xl/2
-  %  -yl/2 -xl/2 0];
 Fp2=T2*[sin(20*pi/180); 0; cos(20*pi/180)];
 
 np2=p2*Fp2;
 
 p3=[xl/2 -yl/2 -pz_cm];
-%p3=[0 pz_cm -yl/2
- %   -pz_cm 0 -xl/2
-  %  yl/2 xl/2 0];
+
 Fp3=T3*[-sin(20*pi/180); 0; cos(20*pi/180)];
 
 np3=p3*Fp3;
 
 p4=[xl/2 yl/2 -pz_cm];
-%p4=[0 pz_cm yl/2
- %   -pz_cm 0 -xl/2
-  %  -yl/2 -xl/2 0];
+
 Fp4=T4*[-sin(20*pi/180); 0; cos(20*pi/180)];
 
 np4=p4*Fp4;
@@ -114,7 +104,6 @@ for k = 1:Nsim
     lbd = x(7:9,k);
     omg  = x(10:12,k);
     R = Euler2R(lbd);
-    %T = u_NL(1,k);
     np = u_NL(2:4,k);
     
     % compute state derivative:
@@ -124,7 +113,7 @@ for k = 1:Nsim
     v_dot= -skew(omg)*v + g_marte*R'*zI - R*D*R'*v - 1/mt*(fp+fa);
     om_dot = -inv(jlr)*skew(omg)*jlr*omg + inv(jlr)*np;
     
-    %R_dot=R*skew(omg); preferivel ser utilizado o lbd_dot
+   
     
     x_dot = [p_dot;v_dot;lbd_dot;om_dot];
 
@@ -135,11 +124,9 @@ for k = 1:Nsim
     y(:,k) = C*x(:,k);
     
 end
-figure(1001);
-plot(t,u_NL);
-grid on;
 
-figure(1002)
+
+figure(1)
 plot(t,y(3,:))
 xlabel('Tempo');
 ylabel('Altitude');
