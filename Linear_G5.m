@@ -56,12 +56,12 @@ mode_ctrl = W'*B,
 u_L = [0.2*mt*g_marte;0.01;0.01;0.01]*(t>=0);
 y_L = lsim(sys,u_L,t,x0)';
 
-figure(90321);
+figure(2);
 plot(t,y_L(1:2,:),'--',t,y(1:2,:),'-.');
 grid on;
 legend('$$p_x$$ (lin)','$$p_y$$ (lin)','$$p_x$$ (nlin)','$$p_y$$ (nlin)');
 
-figure(90322);
+figure(3);
 plot(t,y_L(3:4,:),'--',t,y(3:4,:),'-.');
 grid on;
 legend('$$p_z$$ (lin)','$$\psi$$ (lin)','$$p_z$$ (nlin)','$$\psi$$ (nlin)');

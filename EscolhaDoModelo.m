@@ -35,8 +35,9 @@ disp('1-Maximum vertical velocity');
 disp('2-Median vertical velocity');
 disp('3-Zero velocity (hover)');
 disp('4-Low forward velocity');
+disp('0-Fechar programa');
 mode=input('What is the opperational mode: ');
-while mode~=1 && mode~=2 && mode~=3 && mode~=4
+while mode~=1 && mode~=2 && mode~=3 && mode~=4 && mode~=0
     disp('Non avaible option');
 mode=input('What is the opperational mode: ');
 end
@@ -45,28 +46,23 @@ end
 if mode==1
     eixoy=0;
     Thrust=100000;
+    run Controlador_H_inf.m
 elseif mode==2
     eixoy=0;
     Thrust=100000/4;
+    run Controlador_H_inf.m
 elseif mode==3
     eixoy=0;
     Thrust=g_marte*mt;
+    run Controlador_H_inf.m
 elseif mode==4
     eixoy=sin(20*pi/180);
     Thrust=g_marte*mt;
+    run Controlador_H_inf.m
+elseif mode==0
+    
 end
-run Controlador_H_inf.m
+
     
 
-% test controlability, observability and stability
-[V,DL,W] = eig(A);
-
-if any(real(diag(D)) >=0 ), disp('Linearized system 1 is not stable.'); end
-
-n1_unstable_modes = rank(ctrb(A,B))-12;
-
-if n1_unstable_modes > 0, disp('Linearized system 1 is not controlable.'); end
-
-n1_unobservable_modes = rank(obsv(A,C))-12;
-if n1_unobservable_modes > 0, disp('Linearized system 1 is not observable.'); end
 
