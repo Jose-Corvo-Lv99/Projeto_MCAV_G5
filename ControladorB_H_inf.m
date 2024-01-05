@@ -1,6 +1,4 @@
-
-
-run Linear_G5.m
+run LinearB_G5.m
 
 
 
@@ -128,6 +126,5 @@ plot(t,y,t,r);
 grid on;
 xlabel('t [s]');
 legend('y_1','r_1');
-  
-run EscolhaDoModelo.m
 
+run EscolhaDoModeloB.m

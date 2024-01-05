@@ -20,7 +20,7 @@ jr=[(1/12)*mr*(yr^2+zr^2) 0 0
 
 xl=4;%m
 yl=3.7;
-zl=3.2;
+zl=1;
 ml=1100;%kg
 
 jl=[(1/12)*ml*(yl^2+zl^2) 0 0
@@ -54,49 +54,37 @@ end
 pz_cm=cm_t-zr;
 
 %Definição de um thrust
-T1=(Thrust-g_marte*mt)/4;
+T1=Thrust/4;
 T2=T1;
 T3=T1;
 T4=T1;
 
 
 %Posições dos retrorockets e purpulsão
-%p1=[-xl/2 -yl/2 -pz_cm];
-p1=[0 pz_cm -yl/2
-    -pz_cm 0 xl/2
-    yl/2 -xl/2 0];
+p1=[-xl/2 -yl/2 -pz_cm];
 Fp1=T1*[sin(20*pi/180); eixoy; cos(20*pi/180)];
 
 np1=p1*Fp1;
 
-%p2=[-xl/2 yl/2 -pz_cm];
-p2=[0 pz_cm yl/2
-    -pz_cm 0 xl/2
-    -yl/2 -xl/2 0];
+p2=[-xl/2 yl/2 -pz_cm];
 Fp2=T2*[sin(20*pi/180); eixoy; cos(20*pi/180)];
 
 np2=p2*Fp2;
 
-%p3=[xl/2 -yl/2 -pz_cm];
-p3=[0 pz_cm -yl/2
-    -pz_cm 0 -xl/2
-    yl/2 xl/2 0];
+p3=[xl/2 -yl/2 -pz_cm];
 Fp3=T3*[-sin(20*pi/180); eixoy; cos(20*pi/180)];
 
 np3=p3*Fp3;
 
-%p4=[xl/2 yl/2 -pz_cm];
-p4=[0 pz_cm yl/2
-    -pz_cm 0 -xl/2
-    -yl/2 -xl/2 0];
+p4=[xl/2 yl/2 -pz_cm];
 Fp4=T4*[-sin(20*pi/180); eixoy; cos(20*pi/180)];
 
 np4=p4*Fp4;
 
 
-fp=[Fp1 Fp2 Fp3 Fp4];
-T_m=Fp1+Fp2+Fp3+Fp4;
-np=[np1; np2; np3; np4];
+
+fp=Fp1+Fp2+Fp3+Fp4;
+np=np1+np2+np3+np4;
 %Modelo não linear
 
 zI = [0;0;1];
@@ -126,14 +114,13 @@ for k = 1:Nsim
     lbd = x(7:9,k);
     omg  = x(10:12,k);
     R = Euler2R(lbd);
-    T = u_NL(1,k);
     np = u_NL(2:4,k);
     
     % compute state derivative:
-    fa=4*pi*ro_marte*v.^2;
+    fa=(Area_l/2)*ro_marte*v.^2;
     p_dot=R*v;
     lbd_dot = Euler2Q(lbd)*omg;
-    v_dot= -skew(omg)*v + g_marte*R'*zI - R*D*R'*v - 1/mt*(T_m+fa);
+    v_dot= -skew(omg)*v + g_marte*R'*zI - R*D*R'*v - 1/mt*(fp+fa);
     om_dot = -inv(jlr)*skew(omg)*jlr*omg + inv(jlr)*np;
     
     %R_dot=R*skew(omg); preferivel ser utilizado o lbd_dot
@@ -147,9 +134,9 @@ for k = 1:Nsim
     y(:,k) = C*x(:,k);
     
 end
-figure(1001);
-plot(t,u_NL);
-grid on;
 
-figure(1002)
-plot(t,y(3,:));
+figure(1)
+plot(t,y(3,:))
+xlabel('Tempo');
+ylabel('Altitude');
+

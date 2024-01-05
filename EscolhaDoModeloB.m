@@ -46,23 +46,19 @@ end
 if mode==1
     eixoy=0;
     Thrust=100000;
-    run Controlador_H_inf.m
+    run ControladorB_H_inf.m
 elseif mode==2
     eixoy=0;
     Thrust=100000/4;
-    run Controlador_H_inf.m
+    run ControladorB_H_inf.m
 elseif mode==3
     eixoy=0;
     Thrust=g_marte*mt;
-    run Controlador_H_inf.m
+    run ControladorB_H_inf.m
 elseif mode==4
     eixoy=sin(20*pi/180);
     Thrust=g_marte*mt;
-    run Controlador_H_inf.m
+    run ControladorB_H_inf.m
 elseif mode==0
     
 end
-
-    
-
-

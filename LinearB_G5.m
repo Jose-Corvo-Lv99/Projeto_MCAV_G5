@@ -1,5 +1,4 @@
-
-run Modelo_G5.m
+run ModeloB_G5.m
 
 %Linearização
 
@@ -67,6 +66,3 @@ grid on;
 legend('p_z (lin)','\psi (lin)','p_z (nlin)','\psi (nlin)');
 
 if any(real(diag(D)) >=0 ), disp('Linearized system is not stable.'); end
-
-
-
