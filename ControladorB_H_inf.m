@@ -125,6 +125,7 @@ figure(8);
 plot(t,y,t,r);
 grid on;
 xlabel('t [s]');
+ylabel('y(t)');
 legend('y_1','r_1');
 
 run EscolhaDoModeloB.m

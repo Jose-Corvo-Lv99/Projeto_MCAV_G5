@@ -57,7 +57,7 @@ nmeas = 12;
 ncont = 4;
 
 %Controlador Hinf
-[Kinf,CLinf,gammainf,info_inf] = hinfsyn(P,nmeas,ncont);
+[Kinf,CLinf,gammainf,info_inf] = hinfsyn(P,nmeas,ncont)
 
 % tests on P:
 if (nx - rank(ctrb(A0,B2))) > 0, disp('A1.1 on P: system uncontrolable'); else disp('A1.1 on P: OK'); end
@@ -127,6 +127,7 @@ figure(8);
 plot(t,y,t,r);
 grid on;
 xlabel('t [s]');
+ylabel('y(t)');
 legend('y_1','r_1');
   
 run EscolhaDoModelo.m
